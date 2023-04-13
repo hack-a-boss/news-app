@@ -1,0 +1,471 @@
+{
+	"info": {
+		"_postman_id": "d1c418c9-3de5-4edd-af26-1db12f7dba35",
+		"name": "News app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24930726"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "panker",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "panker@email.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{SERVER_HOST}}:{{SERVER_PORT}}/register",
+							"protocol": "http",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"port": "{{SERVER_PORT}}",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const res = pm.response.json();\r",
+									"pm.collectionVariables.set('token', res.data.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"panker@email.com\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{SERVER_HOST}}:{{SERVER_PORT}}/login",
+							"protocol": "http",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"port": "{{SERVER_PORT}}",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit avatar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{SERVER_HOST}}:{{SERVER_PORT}}/user/avatar",
+							"protocol": "http",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"port": "{{SERVER_PORT}}",
+							"path": [
+								"user",
+								"avatar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "News",
+			"item": [
+				{
+					"name": "Get news",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{SERVER_HOST}}:{{SERVER_PORT}}/news",
+							"protocol": "http",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"port": "{{SERVER_PORT}}",
+							"path": [
+								"news"
+							],
+							"query": [
+								{
+									"key": "theme",
+									"value": "gaming",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get news item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{SERVER_HOST}}:{{SERVER_PORT}}/news/1",
+							"protocol": "http",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"port": "{{SERVER_PORT}}",
+							"path": [
+								"news",
+								"1"
+							],
+							"query": [
+								{
+									"key": "theme",
+									"value": "gaming",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post news item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Elden Ring wins Game of the Year at The Game Awards 2022",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Elden Ring won the top prize at The Game Awards 2022, where it scooped several awards including the coveted Game of the Year.\n\nFromSoftware‘s RPG epic fought off competition from God of War Ragnarok, which also had a successful night winning several awards.\n\nElden Ring and God of War Ragnarök were the biggest winners at the show, sharing 10 of the 32 available prizes at Thursday’s show.\n\nElden Ring’s latest update rolled out earlier this week. The expansion takes place in the several Colosseums that have been dotted around the Elden Ring map since the game was released.\n\nFromSoftware had a busy night, with Armored Core VI: Fires of Rubicon also being revealed during The Game Awards, with a trailer announcing that the game will release on PS5, Xbox Series, and PC.\n\nPublished by Bandai Namco, the sixth installment marks the first new Armored Core game in more than a decade, the last being Armored Core V back in 2012.",
+									"type": "text"
+								},
+								{
+									"key": "theme",
+									"value": "gaming",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{SERVER_HOST}}:{{SERVER_PORT}}/news",
+							"protocol": "http",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"port": "{{SERVER_PORT}}",
+							"path": [
+								"news"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit news item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Elden Ring wins Game of the Year at The Game Awards 2022",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Elden Ring won the top prize at The Game Awards 2022, where it scooped several awards including the coveted Game of the Year.\nFromSoftware‘s RPG epic fought off competition from God of War Ragnarok, which also had a successful night winning several awards.\nElden Ring and God of War Ragnarök were the biggest winners at the show, sharing 10 of the 32 available prizes at Thursday’s show.\nElden Ring’s latest update rolled out earlier this week. The expansion takes place in the several Colosseums that have been dotted around the Elden Ring map since the game was released.\nFromSoftware had a busy night, with Armored Core VI: Fires of Rubicon also being revealed during The Game Awards, with a trailer announcing that the game will release on PS5, Xbox Series, and PC.\nPublished by Bandai Namco, the sixth installment marks the first new Armored Core game in more than a decade, the last being Armored Core V back in 2012.",
+									"type": "text"
+								},
+								{
+									"key": "theme",
+									"value": "gaming",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{SERVER_HOST}}:{{SERVER_PORT}}/news/1",
+							"protocol": "http",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"port": "{{SERVER_PORT}}",
+							"path": [
+								"news",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete news item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{SERVER_HOST}}:{{SERVER_PORT}}/news/1",
+							"protocol": "http",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"port": "{{SERVER_PORT}}",
+							"path": [
+								"news",
+								"1"
+							],
+							"query": [
+								{
+									"key": "theme",
+									"value": "gaming",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Votes",
+			"item": [
+				{
+					"name": "Like news item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://{{SERVER_HOST}}:{{SERVER_PORT}}/news/like/1",
+							"protocol": "http",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"port": "{{SERVER_PORT}}",
+							"path": [
+								"news",
+								"like",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dislike news item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://{{SERVER_HOST}}:{{SERVER_PORT}}/news/dislike/1",
+							"protocol": "http",
+							"host": [
+								"{{SERVER_HOST}}"
+							],
+							"port": "{{SERVER_PORT}}",
+							"path": [
+								"news",
+								"dislike",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "SERVER_HOST",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"key": "SERVER_PORT",
+			"value": "4000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
