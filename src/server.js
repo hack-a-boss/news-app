@@ -2,27 +2,35 @@ require("dotenv").config();
 const express = require("express");
 const fileUpload = require("express-fileupload");
 const cors = require("cors");
+const path = require("path");
 
-const { registerUser, loginUser, editAvatar } = require("./controllers/users");
+const {
+  registerUser,
+  loginUser,
+  editAvatar,
+  getProfile,
+} = require("./controllers/users");
 const {
   getNews,
   getNewsItem,
   postNewsItem,
   editNewsItem,
+  deleteNewsItem,
 } = require("./controllers/news");
 const { likeNewsItem, dislikeNewsItem } = require("./controllers/votes");
 
 const { handleNotFound, handleError, validateAuth } = require("./middlewares");
-const deleteNewsItem = require("./controllers/news/deleteNewsItem");
 
 const app = express();
 
-const { SERVER_HOST, SERVER_PORT } = process.env;
+const { SERVER_HOST, SERVER_PORT, UPLOADS_DIR } = process.env;
 
 app.use(cors());
 app.use(express.json());
 app.use(fileUpload());
+app.use(express.static(path.join(__dirname, UPLOADS_DIR)));
 
+app.get("/profile", validateAuth, getProfile);
 app.post("/register", registerUser);
 app.post("/login", loginUser);
 app.put("/user/avatar", validateAuth, editAvatar);
