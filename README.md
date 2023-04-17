@@ -6,6 +6,18 @@ API que permite gestionar noticias, estilo reddit o menéame, donde los usuarios
 
 ### Los campos marcados con un asterisco son obligatorios
 
+- GET /profile 🔐
+
+  - Se necesita autenticación
+
+  - Responde con los datos del usuario loggeado
+
+- GET /avatars/:avatar
+
+  - El parámetro "avatar" es el nombre del avatar
+
+  - Responde con el avatar del usuario
+
 - POST /register
 
   - Body (JSON o Form-Data en caso de enviar un avatar):
@@ -52,7 +64,7 @@ API que permite gestionar noticias, estilo reddit o menéame, donde los usuarios
     - title
     - content
     - theme
-    - photo
+    - photo (es el nombre de la foto, para verla hay que utilizar el endpoint GET /photos/:photo)
     - createdAt
     - ownerId
     - likes
@@ -69,6 +81,12 @@ API que permite gestionar noticias, estilo reddit o menéame, donde los usuarios
   - No es obligatoria la autenticación. Si el usuario está autenticado le dará información extra como si ha votado la noticia o no
 
   - Responde con la información de la noticia solicitada con el path param "id"
+
+- GET /photos/:photo
+
+  - El parámetro "photo" es el nombre de la foto de una noticia
+
+  - Responde con la foto de la noticia
 
 - POST /news 🔐
 

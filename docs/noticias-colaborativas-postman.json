@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "d1c418c9-3de5-4edd-af26-1db12f7dba35",
-		"name": "News app",
+		"_postman_id": "7b14c75a-7ff1-4050-9e48-65d9981dea09",
+		"name": "NoticiasColaborativas",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "24930726"
 	},
@@ -9,6 +9,51 @@
 		{
 			"name": "Users",
 			"item": [
+				{
+					"name": "Get logged user profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/profile",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get avatar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/avatars/x.png",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"avatars",
+								"x.png"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Register",
 					"request": {
@@ -41,12 +86,10 @@
 							]
 						},
 						"url": {
-							"raw": "http://{{SERVER_HOST}}:{{SERVER_PORT}}/register",
-							"protocol": "http",
+							"raw": "{{HOST}}/register",
 							"host": [
-								"{{SERVER_HOST}}"
+								"{{HOST}}"
 							],
-							"port": "{{SERVER_PORT}}",
 							"path": [
 								"register"
 							]
@@ -81,12 +124,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{SERVER_HOST}}:{{SERVER_PORT}}/login",
-							"protocol": "http",
+							"raw": "{{HOST}}/login",
 							"host": [
-								"{{SERVER_HOST}}"
+								"{{HOST}}"
 							],
-							"port": "{{SERVER_PORT}}",
 							"path": [
 								"login"
 							]
@@ -121,12 +162,10 @@
 							]
 						},
 						"url": {
-							"raw": "http://{{SERVER_HOST}}:{{SERVER_PORT}}/user/avatar",
-							"protocol": "http",
+							"raw": "{{HOST}}/user/avatar",
 							"host": [
-								"{{SERVER_HOST}}"
+								"{{HOST}}"
 							],
-							"port": "{{SERVER_PORT}}",
 							"path": [
 								"user",
 								"avatar"
@@ -156,12 +195,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{SERVER_HOST}}:{{SERVER_PORT}}/news",
-							"protocol": "http",
+							"raw": "{{HOST}}/news",
 							"host": [
-								"{{SERVER_HOST}}"
+								"{{HOST}}"
 							],
-							"port": "{{SERVER_PORT}}",
 							"path": [
 								"news"
 							],
@@ -192,12 +229,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{SERVER_HOST}}:{{SERVER_PORT}}/news/1",
-							"protocol": "http",
+							"raw": "{{HOST}}/news/1",
 							"host": [
-								"{{SERVER_HOST}}"
+								"{{HOST}}"
 							],
-							"port": "{{SERVER_PORT}}",
 							"path": [
 								"news",
 								"1"
@@ -208,6 +243,24 @@
 									"value": "gaming",
 									"disabled": true
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get news item photo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/photos/x.png",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"photos",
+								"x.png"
 							]
 						}
 					},
@@ -255,12 +308,10 @@
 							]
 						},
 						"url": {
-							"raw": "http://{{SERVER_HOST}}:{{SERVER_PORT}}/news",
-							"protocol": "http",
+							"raw": "{{HOST}}/news",
 							"host": [
-								"{{SERVER_HOST}}"
+								"{{HOST}}"
 							],
-							"port": "{{SERVER_PORT}}",
 							"path": [
 								"news"
 							]
@@ -310,12 +361,10 @@
 							]
 						},
 						"url": {
-							"raw": "http://{{SERVER_HOST}}:{{SERVER_PORT}}/news/1",
-							"protocol": "http",
+							"raw": "{{HOST}}/news/1",
 							"host": [
-								"{{SERVER_HOST}}"
+								"{{HOST}}"
 							],
-							"port": "{{SERVER_PORT}}",
 							"path": [
 								"news",
 								"1"
@@ -340,12 +389,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://{{SERVER_HOST}}:{{SERVER_PORT}}/news/1",
-							"protocol": "http",
+							"raw": "{{HOST}}/news/1",
 							"host": [
-								"{{SERVER_HOST}}"
+								"{{HOST}}"
 							],
-							"port": "{{SERVER_PORT}}",
 							"path": [
 								"news",
 								"1"
@@ -382,12 +429,10 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://{{SERVER_HOST}}:{{SERVER_PORT}}/news/like/1",
-							"protocol": "http",
+							"raw": "{{HOST}}/news/like/1",
 							"host": [
-								"{{SERVER_HOST}}"
+								"{{HOST}}"
 							],
-							"port": "{{SERVER_PORT}}",
 							"path": [
 								"news",
 								"like",
@@ -413,12 +458,10 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://{{SERVER_HOST}}:{{SERVER_PORT}}/news/dislike/1",
-							"protocol": "http",
+							"raw": "{{HOST}}/news/dislike/1",
 							"host": [
-								"{{SERVER_HOST}}"
+								"{{HOST}}"
 							],
-							"port": "{{SERVER_PORT}}",
 							"path": [
 								"news",
 								"dislike",
@@ -453,18 +496,13 @@
 	],
 	"variable": [
 		{
-			"key": "SERVER_HOST",
-			"value": "localhost",
-			"type": "string"
-		},
-		{
-			"key": "SERVER_PORT",
-			"value": "4000",
-			"type": "string"
-		},
-		{
 			"key": "token",
 			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "HOST",
+			"value": "https://noticias.backends.hackaboss.com",
 			"type": "string"
 		}
 	]
